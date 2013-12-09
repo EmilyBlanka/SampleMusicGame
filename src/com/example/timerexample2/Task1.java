@@ -3,32 +3,30 @@ package com.example.timerexample2;
 import java.util.TimerTask;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Handler;
-import android.widget.Toast;
 
 public class Task1 extends TimerTask {
 	
 	private Handler handler;
+	private MediaPlayer mediaPlayer;
 	private Context context;
 	
 	public Task1(Context context) {
+		this.context=context;
 		handler = new Handler();
-		this.context = context;
+		mediaPlayer =MediaPlayer.create(context, R.raw.test0);
 	}
-
+	
 	@Override
 	public void run() {
-		// Viewの操作だけじゃなくてトーストを出すのにもHandler使わないといけないのか...
 		handler.post(new Runnable() {
-			 @Override
-			 public void run() {
-			        // トーストを出す。
-			        Toast myToast = Toast.makeText(
-			            context, "Hello, How are you?",
-			            Toast.LENGTH_SHORT);
-			        myToast.show();
-			      }
-			    });
-			  }
+			@Override
+			public void run() {
+				mediaPlayer.start();
 			}
-
+		});
+	}
+	
+	
+}

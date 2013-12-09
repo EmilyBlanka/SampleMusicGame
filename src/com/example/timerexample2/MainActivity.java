@@ -14,11 +14,14 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private long repeatInterval =5000; 
-	private long delay =0;  // 繰り返しの間隔（単位：msec）
-	Timer timer1;
-	Timer timer2;
-	Timer timer3;
+	private long justnow =0;  // 繰り返しの間隔（単位：msec）
+	private long[] delay1= {1000,3000,6000};
+	private long[] delay2={3000,4000};
+	private long[] delay3={3000,4000};
+	private long[] delay4={3000,4000};
+	
+	Timer timer =new Timer();
+
 	Handler handler;
 	
 	@Override
@@ -33,28 +36,45 @@ public class MainActivity extends Activity {
 		button1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// タイマー1をセット
-				/*timer1 = new Timer();
-				TimerTask timerTask1 = new Task1(MainActivity.this);
-				timer1.scheduleAtFixedRate(timerTask1, repeatInterval, repeatInterval);*/
+			
 					
-				// タイマー2をセット
-				timer2 = new Timer();
-				TimerTask timerTask2 = new Task2(MainActivity.this);
-				timer2.schedule(timerTask2, delay);
+				// タイマー1をセット
 				
-				// タイマー3をセット
-				timer3 = new Timer();
-				TimerTask timerTask3 = new Task3(MainActivity.this,handler);
-				timer3.schedule(timerTask3, delay);
+				TimerTask timerTask1 = new Task1(MainActivity.this);
+				timer.schedule(timerTask1, justnow);
 				
+				
+				// タイマー2(イメージボタン1)をセット
+				for(int i=0;i<2;i++) {	
+					TimerTask timerTask2 = new Task2(MainActivity.this,handler);
+					timer.schedule(timerTask2, delay1[i]);
+				}
+			
+				// タイマー3(イメージボタン2)をセット
+				for(int i=0;i<2;i++) {
+					TimerTask timerTask3 = new Task3(MainActivity.this,handler);
+					timer.schedule(timerTask3, delay2[i]);
+				}
+				
+				// タイマー4(イメージボタン3)をセット
+				for(int i=0;i<2;i++) {
+					TimerTask timerTask4 = new Task4(MainActivity.this,handler);
+					timer.schedule(timerTask4, delay3[i]);
+				}
+				
+				// タイマー5(イメージボタン4)をセット
+				for(int i=0;i<2;i++) {
+					TimerTask timerTask5 = new Task5(MainActivity.this,handler);
+					timer.schedule(timerTask5, delay4[i]);
+				}
 				
 				// トーストでタイマー開始を通知
 				Toast toast = Toast.makeText(MainActivity.this, R.string.timer_start,Toast.LENGTH_LONG);
 				toast.show();
 			}
-		});
+			});
 	}
+	
 		/**
 		 * 終了処理
 		 */
@@ -68,13 +88,9 @@ public class MainActivity extends Activity {
 		 * タイマーをキャンセルする。
 		 */
 		private void cancelTimer() {
-			if (timer1 != null) {
-				 timer1.cancel();
-			} else if (timer2 != null) {
-				timer2.cancel();
-			} else if (timer3 != null) {
-				timer3.cancel();
-			}
+			if (timer != null) {
+				 timer.cancel();
+			} 
 		}
 		
 	@Override
