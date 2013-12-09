@@ -18,7 +18,7 @@ public class Task1 extends TimerTask {
 
 	@Override
 	public void run() {
-		// Viewの操作だけじゃなくてトーストを出すのにもHandler使わないといけないのか
+		// Viewの操作だけじゃなくてトーストを出すのにもHandler使わないといけないのか...
 		handler.post(new Runnable() {
 			 @Override
 			 public void run() {
