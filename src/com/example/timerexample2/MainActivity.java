@@ -43,6 +43,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private long Touch1TimeMillis;
 	private long StartTimeMillis;
 	private long Time ;
+	int score=0;
 	
 	Timer timer =new Timer();
 	Handler handler;
@@ -140,6 +141,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 		public boolean onTouch(View v, MotionEvent event) {
 			// TODO Auto-generated method stub
 			
+			String stringscore = String.valueOf(score);
+			TextView textView6 = (TextView) findViewById(R.id.textView5);
+			textView6.setText(stringscore);
+			
 			
 			if(event.getAction() == MotionEvent.ACTION_DOWN) {
 				switch (v.getId()) {
@@ -163,16 +168,23 @@ public class MainActivity extends Activity implements OnTouchListener {
 							TextView textView3 = (TextView) findViewById(R.id.textView4);
 							textView3.setText("Great!");
 							
+							score +=100;
+							
 						//400msc‚Ì—P—\
 						} else if ((delay1[i]+400-500) <= Time && Time < (delay1[i]+400-100)) {
 							TextView textView4 = (TextView) findViewById(R.id.textView4);
 							textView4.setText("Good!");
+							
+							score +=50;
+							
 						} else if ((delay1[i]+400+100) < Time && Time <= (delay1[i]+400+500)) {
 							TextView textView4 = (TextView) findViewById(R.id.textView4);
 							textView4.setText("Good!");
+							score +=50;
 						}else  {
 								TextView textView5 = (TextView) findViewById(R.id.textView4);
 								textView5.setText("Bad.");
+								score +=50;
 						}
 					}
 					break;
